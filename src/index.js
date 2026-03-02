@@ -15,6 +15,7 @@ app.get('/',(req,res)=>{
 
 
 // user api routes
+
 app.use('/api/user', userRouter);
 
 mongoose.connect(process.env.MONGODB_URI,)

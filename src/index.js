@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const userRouter = require("./routes/user.routes.js");
+const cors = require('cors');
 require('dotenv').config();
 
 
@@ -9,7 +10,10 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+}));
 
 app.get('/',(req,res)=>{
     res.send('Hello World');

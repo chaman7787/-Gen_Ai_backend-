@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const userRouter = require("./routes/user.routes.js");
+const {invokeGeminiAi} = require("./services/ai.service.js");
 const cors = require('cors');
 require('dotenv').config();
 
@@ -15,10 +16,13 @@ app.use(cors({
     credentials: true,
 }));
 
+
+
 app.get('/',(req,res)=>{
     res.send('Hello World');
 })
 
+invokeGeminiAi();
 
 // user api routes
 

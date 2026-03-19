@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const userRouter = require("./routes/user.routes.js");
-const {invokeGeminiAi} = require("./services/ai.service.js");
+const interviewRouter = require("./routes/interview.route.js");
 
 
 const cors = require('cors');
@@ -29,6 +29,8 @@ app.get('/',(req,res)=>{
 // user api routes
 
 app.use('/api/user', userRouter);
+app.use('/api/interview', interviewRouter);
+
 
 mongoose.connect(process.env.MONGODB_URI,)
     .then(() => {

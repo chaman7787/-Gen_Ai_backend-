@@ -1,10 +1,10 @@
-const { GoogleGenAI } = require("@google/genai")
-const { z } = require("zod")
-const { zodToJsonSchema } = require("zod-to-json-schema")
-const puppeteer = require("puppeteer");
+import { GoogleGenAI } from "@google/genai";
+import { z } from "zod";
+import { zodToJsonSchema } from "zod-to-json-schema";
+import puppeteer from "puppeteer";
+import dotenv from "dotenv";
 
-const dotenv = require("dotenv")
-dotenv.config()
+dotenv.config();
 
 // ✅ Step 2 — Now API key is available
 const ai = new GoogleGenAI({
@@ -94,7 +94,7 @@ async function generatePdfFromHtml(htmlContent) {
 }
 
 
-async function generateResumePdf({ resume, selfDescription, jobDescription }) {
+export async function generateResumePdf({ resume, selfDescription, jobDescription }) {
 
     const resumePdfSchema = z.object({
         html: z.string().describe("The HTML content of the resume which can be converted to PDF using any library like puppeteer")
@@ -132,7 +132,4 @@ async function generateResumePdf({ resume, selfDescription, jobDescription }) {
 }
 
 
-module.exports = {
-    generateInterviewReport,
-    generateResumePdf
-}
+export { generateInterviewReport };

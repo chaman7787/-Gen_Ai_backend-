@@ -17,3 +17,4 @@ router.post('/logout', userController.logoutUser);
 router.get('/get-me',authMiddleware,userController.getMyData);
 
 module.exports = router;
+

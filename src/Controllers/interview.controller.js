@@ -1,4 +1,5 @@
 const pdfParse = require("pdf-parse");
+const mongoose = require("mongoose");
 const {generateInterviewReport,generateResumePdf} = require("../services/ai.service.js");
 const interviewReportModel = require("../models/interviewReport.model")
 
@@ -32,6 +33,10 @@ async function generateInterviewReportController(req, res) {
 async function getReportByIdController(req, res) {
     const {interviewId} = req.params;
 
+    if (!interviewId || !mongoose.Types.ObjectId.isValid(interviewId)) {
+        return res.status(400).json({message: "Invalid interview report id."})
+    }
+
     const interviewReport = await interviewReportModel.findOne({_id: interviewId, user: req.user.id})
     if (!interviewReport) {
         return res.status(404).json({message: "Interview report not found."})
@@ -61,6 +66,12 @@ async function getAllReportsController(req, res) {
 
 async function generateResumePdfController(req, res) {
     const { interviewReportId } = req.params
+
+    if (!interviewReportId || !mongoose.Types.ObjectId.isValid(interviewReportId)) {
+        return res.status(400).json({
+            message: "Invalid interview report id."
+        })
+    }
 
     const interviewReport = await interviewReportModel.findById(interviewReportId)
 
